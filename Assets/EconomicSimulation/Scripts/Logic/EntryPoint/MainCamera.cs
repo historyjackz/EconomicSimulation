@@ -24,6 +24,7 @@ namespace Nashet.EconomicSimulation
         internal static PoliticsPanel politicsPanel;
         internal static FinancePanel financePanel;
         internal static MilitaryPanel militaryPanel;
+		internal static GovPanel govPanel; 
 
         internal static LoadingPanel loadingPanel;
         internal static BottomPanel bottomPanel;
@@ -188,6 +189,7 @@ namespace Nashet.EconomicSimulation
             if (popUnitPanel.isActiveAndEnabled) popUnitPanel.Refresh();
             if (StatisticPanel.isActiveAndEnabled) StatisticPanel.Refresh();
             if (provincePanel.isActiveAndEnabled) provincePanel.Refresh();
+			if (govPanel.isActiveAndEnabled) govPanel.Refresh ();
 
             //if (bottomPanel.isActiveAndEnabled) bottomPanel.refresh();
         }

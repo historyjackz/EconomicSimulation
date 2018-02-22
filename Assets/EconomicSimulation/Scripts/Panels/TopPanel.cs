@@ -11,10 +11,10 @@ namespace Nashet.EconomicSimulation
         private MainCamera mainCamera;
 
         [SerializeField]
-        private Button btnPlay, btnStep, btnTrade;
+        private Button btnPlay, btnStep, btnTrade, btnGov;
 
         [SerializeField]
-		private Text generalText, specificText;
+		private Text generalText, specificText, pointsText;
 
         // Use this for initialization
         void Awake()
@@ -35,20 +35,21 @@ namespace Nashet.EconomicSimulation
         }
         public override void Refresh()
         {
-            var sb = new StringBuilder();
-            sb.Append("You rule: ").Append(Game.Player.GetFullName()).Append(" Month: ").Append(Game.date);
-            //sb.Append (Game.Player.GetFullName ()).Append(" $").Append(Game.Player.cash.get().ToString("N0")).Append(" Month: ").Append(Game.date);
-            if (!Game.Player.isAlive())
-                sb.Append(" (destroyed by enemies, but could rise again)");
+			var sb = new StringBuilder();
+			sb.Append("You rule: ").Append(Game.Player.GetFullName()).Append(" Month: ").Append(Game.date);
+			//sb.Append (Game.Player.GetFullName ()).Append(" $").Append(Game.Player.cash.get().ToString("N0")).Append(" Month: ").Append(Game.date);
+			if (!Game.Player.isAlive())
+				sb.Append(" (destroyed by enemies, but could rise again)");
 
-            //sb.Append("\nEng: ").Append(Game.Player.sciencePoints.get().ToString("F0"));
-            sb.Append("\nMoney: ").Append(Game.Player.cash.get().ToString("N0"))
-            .Append(" Science points: ").Append(Game.Player.sciencePoints.get().ToString("F0"));
+			//sb.Append("\nEng: ").Append(Game.Player.sciencePoints.get().ToString("F0"));
+			sb.Append("\nMoney: ").Append(Game.Player.cash.get().ToString("N0"))
+				.Append(" Tech Points: ").Append(Game.Player.sciencePoints.get().ToString("F0"));
 
-            if (Game.Player.isAlive())
-                sb.Append(" Population: ").Append(Game.Player.getFamilyPopulation().ToString("N0"))
-                .Append(" Loyalty: ").Append(Game.Player.getAverageLoyalty());
-            generalText.text = sb.ToString();
+			if (Game.Player.isAlive())
+				sb.Append(" Population: ").Append(Game.Player.getFamilyPopulation().ToString("N0"))
+					.Append(" Loyalty: ").Append(Game.Player.getAverageLoyalty());
+			generalText.text = sb.ToString();
+
         }
         public void onTradeClick()
         {
@@ -57,6 +58,13 @@ namespace Nashet.EconomicSimulation
             else
                 MainCamera.tradeWindow.Show();
         }
+		public void onGovClick()
+		{
+			if (MainCamera.govPanel.isActiveAndEnabled)
+				MainCamera.govPanel.Hide ();
+			else
+				MainCamera.govPanel.Show ();
+		}
         public void onExitClick()
         {
             Application.Quit();
